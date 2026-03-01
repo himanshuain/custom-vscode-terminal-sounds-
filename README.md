@@ -110,6 +110,23 @@ Set `devSounds.successSoundPath` to the absolute path of your audio file.
 **Reset:**
 Run `Dev Sounds: Reset All Sounds to Default` to revert to the built-in sounds.
 
+## Standalone Shell Integration (no VS Code required)
+
+Want sounds in your regular terminal too? Drop the shell script into your config:
+
+```bash
+# Copy the script and sounds
+mkdir -p ~/.config/dev-sounds/sounds
+cp shell/dev-sounds.sh ~/.config/dev-sounds/
+cp media/success.mp3 media/error.mp3 media/longrun.mp3 ~/.config/dev-sounds/sounds/
+
+# Add to your .zshrc
+echo '[[ -f "$HOME/.config/dev-sounds/dev-sounds.sh" ]] && source "$HOME/.config/dev-sounds/dev-sounds.sh"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+This hooks into zsh's `preexec`/`precmd` and plays sounds automatically for every command — works in any terminal app (iTerm2, Alacritty, Warp, etc.).
+
 ## Architecture
 
 ```
@@ -123,6 +140,8 @@ dev-sounds-vscode/
 │   ├── error.mp3         # Built-in error alert
 │   ├── longrun.mp3       # Built-in long-run notification
 │   └── icon.png          # Extension icon
+├── shell/
+│   └── dev-sounds.sh     # Standalone zsh integration (no VS Code needed)
 ├── CHANGELOG.md
 └── LICENSE
 ```
