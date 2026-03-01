@@ -1,0 +1,153 @@
+{
+  "name": "dev-sounds",
+  "displayName": "Dev Sounds",
+  "description": "Automatic sound effects for your terminal — success chime, error alert, and long-running command notifications.",
+  "version": "1.0.0",
+  "publisher": "himanshu-jain",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/himanshuain/custom-vscode-terminal-sounds-"
+  },
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "sound",
+    "terminal",
+    "notification",
+    "audio",
+    "build",
+    "error",
+    "success",
+    "productivity"
+  ],
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devSounds.toggle",
+        "title": "Dev Sounds: Toggle On/Off"
+      },
+      {
+        "command": "devSounds.playSuccess",
+        "title": "Dev Sounds: Play Success Sound"
+      },
+      {
+        "command": "devSounds.playError",
+        "title": "Dev Sounds: Play Error Sound"
+      },
+      {
+        "command": "devSounds.playLongrun",
+        "title": "Dev Sounds: Play Long-Run Sound"
+      },
+      {
+        "command": "devSounds.selectSuccessSound",
+        "title": "Dev Sounds: Choose Custom Success Sound"
+      },
+      {
+        "command": "devSounds.selectErrorSound",
+        "title": "Dev Sounds: Choose Custom Error Sound"
+      },
+      {
+        "command": "devSounds.selectLongrunSound",
+        "title": "Dev Sounds: Choose Custom Long-Run Sound"
+      },
+      {
+        "command": "devSounds.resetSounds",
+        "title": "Dev Sounds: Reset All Sounds to Default"
+      }
+    ],
+    "configuration": {
+      "title": "Dev Sounds",
+      "properties": {
+        "devSounds.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable all sound effects."
+        },
+        "devSounds.volume": {
+          "type": "number",
+          "default": 0.3,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Playback volume (0.0 = silent, 1.0 = full)."
+        },
+        "devSounds.longRunThreshold": {
+          "type": "number",
+          "default": 30,
+          "minimum": 1,
+          "description": "Seconds before a command is considered long-running."
+        },
+        "devSounds.successSoundPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom success sound (MP3/WAV). Leave empty for the built-in sound."
+        },
+        "devSounds.errorSoundPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom error sound (MP3/WAV). Leave empty for the built-in sound."
+        },
+        "devSounds.longRunSoundPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a custom long-run notification sound (MP3/WAV). Leave empty for the built-in sound."
+        },
+        "devSounds.exemptCommands": {
+          "type": "array",
+          "default": [
+            "ls",
+            "ll",
+            "la",
+            "dir",
+            "cd",
+            "pwd",
+            "echo",
+            "cat",
+            "head",
+            "tail",
+            "less",
+            "more",
+            "clear",
+            "which",
+            "alias",
+            "export",
+            "source",
+            "history",
+            "man",
+            "help",
+            "nvm"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Commands that should never trigger sounds."
+        },
+        "devSounds.enableForTasks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play sounds when VS Code tasks (build, test, etc.) complete."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.2.0"
+  }
+}
